@@ -10,7 +10,7 @@ def filter_by_state(transactions: list[dict], state: str = "EXECUTED") -> list[d
 def sort_by_date(transactions: list[dict], reverse: bool = True) -> list[dict]:
     """
 
-    Сортирует список словарей по дате (ключ 'date').
+    Функция, которая принимает список словарей и необязательный параметр, задающий порядок сортировки.
 
     """
     return sorted(transactions, key=lambda x: x["date"], reverse=reverse)
