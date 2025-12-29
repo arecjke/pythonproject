@@ -1,7 +1,6 @@
 import json
 import os
-from typing import List, Dict, Any
-
+from typing import Any, Dict, List
 
 
 def load_transactions(file_path: str = None) -> List[Dict[str, Any]]:
@@ -19,10 +18,10 @@ def load_transactions(file_path: str = None) -> List[Dict[str, Any]]:
     if file_path is None:
         # Получаем абсолютный путь к директории проекта
         current_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-        file_path = os.path.join(current_dir, 'data', 'operations.json')
+        file_path = os.path.join(current_dir, "data", "operations.json")
 
     try:
-        with open(file_path, 'r', encoding='utf-8') as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             data = json.load(file)
 
         if isinstance(data, list):
@@ -53,15 +52,15 @@ if __name__ == "__main__":
             print(f"Дата: {transaction.get('date', 'N/A')}")
             print(f"Описание: {transaction.get('description', 'N/A')}")
 
-            operation_amount = transaction.get('operationAmount', {})
-            amount = operation_amount.get('amount', 'N/A')
-            currency = operation_amount.get('currency', {})
-            currency_name = currency.get('name', 'N/A')
+            operation_amount = transaction.get("operationAmount", {})
+            amount = operation_amount.get("amount", "N/A")
+            currency = operation_amount.get("currency", {})
+            currency_name = currency.get("name", "N/A")
             print(f"Сумма: {amount} {currency_name}")
 
-            if 'from' in transaction:
+            if "from" in transaction:
                 print(f"Откуда: {transaction['from']}")
-            if 'to' in transaction:
+            if "to" in transaction:
                 print(f"Куда: {transaction['to']}")
 
             print("-" * 40)
