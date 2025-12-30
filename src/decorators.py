@@ -15,17 +15,17 @@ def log(filename=None):
 
                 # Записываем или выводим лог
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
+                    with open(filename, "a", encoding="utf-8") as f:
                         f.write(success_message)
                 else:
-                    print(success_message, end='')
+                    print(success_message, end="")
 
                 return result
 
             except Exception as e:
                 # Информация о входных параметрах
-                args_str = ', '.join(repr(arg) for arg in args)
-                kwargs_str = ', '.join(f'{k}={repr(v)}' for k, v in kwargs.items())
+                args_str = ", ".join(repr(arg) for arg in args)
+                kwargs_str = ", ".join(f"{k}={repr(v)}" for k, v in kwargs.items())
                 inputs_info = f"({args_str})"
                 if kwargs_str:
                     inputs_info += f", {{{kwargs_str}}}"
@@ -35,10 +35,10 @@ def log(filename=None):
 
                 # Записываем или выводим лог
                 if filename:
-                    with open(filename, 'a', encoding='utf-8') as f:
+                    with open(filename, "a", encoding="utf-8") as f:
                         f.write(error_message)
                 else:
-                    print(error_message, end='')
+                    print(error_message, end="")
 
                 # Пробрасываем исключение дальше
                 raise

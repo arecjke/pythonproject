@@ -9,14 +9,14 @@ def converter_currency(transaction: float, currency: str) -> float:
 
     # Проверка типа данных суммы ТОЛЬКО если это не число
     if not isinstance(transaction, (int, float)):
-        print(f"Введена неверная сумма транзакции")
+        print("Введена неверная сумма транзакции")
         return None
 
     # Проверяем, что transaction - число (int или float)
     try:
         amount = float(transaction)
     except (ValueError, TypeError):
-        print(f"Введена неверная сумма транзакции")
+        print("Введена неверная сумма транзакции")
         return None
 
     # Условие валюты

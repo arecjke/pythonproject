@@ -1,6 +1,7 @@
-import pytest
-import tempfile
 import os
+import tempfile
+
+import pytest
 
 from src.decorators import log
 
@@ -9,10 +10,11 @@ class TestLogDecorator:
 
     def test_log_to_file_success(self):
         """Тест записи успешного выполнения в файл"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8') as tmp:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, encoding="utf-8") as tmp:
             log_file = tmp.name
 
         try:
+
             @log(filename=log_file)
             def test_func(x, y):
                 return x + y
@@ -22,7 +24,7 @@ class TestLogDecorator:
             assert result == 5
             assert os.path.exists(log_file)
 
-            with open(log_file, 'r', encoding='utf-8') as f:
+            with open(log_file, "r", encoding="utf-8") as f:
                 content = f.read()
                 assert "test_func ok" in content
         finally:
@@ -30,10 +32,11 @@ class TestLogDecorator:
 
     def test_log_to_file_error(self):
         """Тест записи ошибки в файл"""
-        with tempfile.NamedTemporaryFile(mode='w', delete=False, encoding='utf-8') as tmp:
+        with tempfile.NamedTemporaryFile(mode="w", delete=False, encoding="utf-8") as tmp:
             log_file = tmp.name
 
         try:
+
             @log(filename=log_file)
             def test_func(x, y):
                 return x / y
@@ -43,7 +46,7 @@ class TestLogDecorator:
 
             assert os.path.exists(log_file)
 
-            with open(log_file, 'r', encoding='utf-8') as f:
+            with open(log_file, "r", encoding="utf-8") as f:
                 content = f.read()
                 assert "test_func error: ZeroDivisionError" in content
                 assert "Inputs: (1, 0)" in content

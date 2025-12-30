@@ -1,5 +1,7 @@
 import pytest
-from src.generators import filter_by_currency, transaction_descriptions, card_number_generator
+
+from src.generators import card_number_generator, filter_by_currency, transaction_descriptions
+
 
 class TestFilterByCurrency:
 
@@ -7,34 +9,10 @@ class TestFilterByCurrency:
     def sample_transactions(self):
         """Фикстура с примерными транзакциями для тестирования."""
         return [
-            {
-                "id": 1,
-                "operationAmount": {
-                    "amount": "100.00",
-                    "currency": {"name": "USD", "code": "USD"}
-                }
-            },
-            {
-                "id": 2,
-                "operationAmount": {
-                    "amount": "200.00",
-                    "currency": {"name": "EUR", "code": "EUR"}
-                }
-            },
-            {
-                "id": 3,
-                "operationAmount": {
-                    "amount": "300.00",
-                    "currency": {"name": "USD", "code": "USD"}
-                }
-            },
-            {
-                "id": 4,
-                "operationAmount": {
-                    "amount": "400.00",
-                    "currency": {"name": "RUB", "code": "RUB"}
-                }
-            }
+            {"id": 1, "operationAmount": {"amount": "100.00", "currency": {"name": "USD", "code": "USD"}}},
+            {"id": 2, "operationAmount": {"amount": "200.00", "currency": {"name": "EUR", "code": "EUR"}}},
+            {"id": 3, "operationAmount": {"amount": "300.00", "currency": {"name": "USD", "code": "USD"}}},
+            {"id": 4, "operationAmount": {"amount": "400.00", "currency": {"name": "RUB", "code": "RUB"}}},
         ]
 
     def test_filter_usd_transactions(self, sample_transactions):
@@ -44,8 +22,7 @@ class TestFilterByCurrency:
         assert len(usd_transactions) == 2
         assert usd_transactions[0]["id"] == 1
         assert usd_transactions[1]["id"] == 3
-        assert all(tx["operationAmount"]["currency"]["code"] == "USD"
-                   for tx in usd_transactions)
+        assert all(tx["operationAmount"]["currency"]["code"] == "USD" for tx in usd_transactions)
 
     def test_filter_eur_transactions(self, sample_transactions):
         """Тест фильтрации EUR транзакций."""
@@ -69,7 +46,7 @@ def test_basic_descriptions_extraction():
     transactions = [
         {"id": 1, "description": "Перевод организации", "amount": "100"},
         {"id": 2, "description": "Оплата услуг", "amount": "200"},
-        {"id": 3, "description": "Пополнение счета", "amount": "300"}
+        {"id": 3, "description": "Пополнение счета", "amount": "300"},
     ]
 
     result = list(transaction_descriptions(transactions))
@@ -89,7 +66,7 @@ def test_generator_behavior():
     transactions = [
         {"description": "Первая операция"},
         {"description": "Вторая операция"},
-        {"description": "Третья операция"}
+        {"description": "Третья операция"},
     ]
 
     gen = transaction_descriptions(transactions)
@@ -110,7 +87,7 @@ class TestCardNumberGenerator:
             "0000 0000 0000 0002",
             "0000 0000 0000 0003",
             "0000 0000 0000 0004",
-            "0000 0000 0000 0005"
+            "0000 0000 0000 0005",
         ]
 
         assert result == expected
